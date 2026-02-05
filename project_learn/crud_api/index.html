@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie API Client</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input, button { margin: 5px; padding: 5px; }
+        #movies { margin-top: 20px; }
+        .movie { border: 1px solid #ccc; padding: 10px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Movie API Client</h1>
+
+    <h2>Create Movie</h2>
+    <input type="text" id="title" placeholder="title">
+    <input type="text" id="isbn" placeholder="ISBN">
+    <input type="text" id="directorFirst" placeholder="Director First Name">
+    <input type="text" id="directorLast" placeholder="Director Last Name">
+    <button onclick="createMovie()">Create</button>
+
+    <h2>Get Movie By ID</h2>
+    <input type="text" id="getId" placeholder="Movie ID">
+    <button onclick="getMovie()">Get Movie</button>
+
+    <h2>Update Movie</h2>
+    <input type="text" id="updateId" placeholder="Movie ID">
+    <input type="text" id="updatetitle" placeholder="New title">
+    <input type="text" id="updateIsbn" placeholder="New ISBN">
+    <input type="text" id="updateDirectorFirst" placeholder="Director First Name">
+    <input type="text" id="updateDirectorLast" placeholder="Director Last Name">
+    <button onclick="updateMovie()">Update</button>
+
+    <h2>Delete Movie</h2>
+    <input type="text" id="deleteId" placeholder="Movie ID">
+    <button onclick="deleteMovie()">Delete</button>
+
+    <h2>All Movies</h2>
+    <button onclick="getAllMovies()">Refresh List</button>
+    <div id="movies"></div>
+
+    <script>
+        const baseUrl = "http://localhost:8083";
+
+        function displayMovies(data) {
+            const container = document.getElementById("movies");
+            container.innerHTML = "";
+            if(Array.isArray(data)) {
+                data.forEach(movie => {
+                    const div = document.createElement("div");
+                    div.className = "movie";
+                    div.innerHTML = `<strong>${movie.title}</strong> (ID: ${movie.id})<br>
+                                     ISBN: ${movie.Isbn}<br>
+                                     Director: ${movie.director ? movie.director.firstname + " " + movie.director.lastname : ""}`;
+                    container.appendChild(div);
+                });
+            } else if(data) {
+                const div = document.createElement("div");
+                div.className = "movie";
+                div.innerHTML = `<strong>${data.title}</strong> (ID: ${data.id})<br>
+                                 ISBN: ${data.Isbn}<br>
+                                 Director: ${data.director ? data.director.firstname + " " + data.director.lastname : ""}`;
+                container.appendChild(div);
+            }
+        }
+
+        async function getAllMovies() {
+            const res = await fetch(`${baseUrl}/movies`);
+            const data = await res.json();
+            displayMovies(data);
+        }
+
+        async function getMovie() {
+            const id = document.getElementById("getId").value;
+            const res = await fetch(`${baseUrl}/movies/${id}`);
+            if(res.ok) {
+                const data = await res.json();
+                displayMovies(data);
+            } else {
+                alert("Movie not found");
+            }
+        }
+
+        async function createMovie() {
+            const movie = {
+                title: document.getElementById("title").value,
+                Isbn: document.getElementById("isbn").value,
+                director: {
+                    firstname: document.getElementById("directorFirst").value,
+                    lastname: document.getElementById("directorLast").value
+                }
+            };
+            const res = await fetch(`${baseUrl}/createMovie`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(movie)
+            });
+            const data = await res.json();
+            alert("Movie Created: ID " + data.id);
+            getAllMovies();
+        }
+
+        async function updateMovie() {
+            const id = document.getElementById("updateId").value;
+            const movie = {
+                title: document.getElementById("updatetitle").value,
+                Isbn: document.getElementById("updateIsbn").value,
+                director: {
+                    firstname: document.getElementById("updateDirectorFirst").value,
+                    lastname: document.getElementById("updateDirectorLast").value
+                }
+            };
+            const res = await fetch(`${baseUrl}/updateMovie/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(movie)
+            });
+            if(res.ok) {
+                const data = await res.json();
+                alert("Movie Updated: ID " + data.id);
+                getAllMovies();
+            } else {
+                alert("Movie not found");
+            }
+        }
+
+        async function deleteMovie() {
+            const id = document.getElementById("deleteId").value;
+            const res = await fetch(`http://localhost:8083/deleteMovie/${id}`, {method: "DELETE"});
+
+            if(res.ok) {
+                alert("Movie deleted");
+                getAllMovies();
+            } else {
+                alert("Failed to delete movie");
+            }
+        }
+        getAllMovies();
+    </script>
+</body>
+</html>
