@@ -3,3 +3,67 @@ mongo_pass=9LLxYbUkB8bZZ6U3
 username=kanishkraval1_db_user
 
 mongodb+srv://kanishkraval1_db_user:9LLxYbUkB8bZZ6U3@cluster0.9p9dijr.mongodb.net/?appName=Cluster0
+
+
+
+this also tell on which direction the research for this is moving 
+ 
+
+
+good morning everyone my name is gaurav kumar and today i am here to present my 
+
+
+If you look at this timeline, you can see a clear shift in the industry.
+
+On the left, from 2015 to 2019, we were in the 'CNN Era,' dominated by U-Net and its variants like Attn U-Net. These were excellent but limited to local features.
++1
+
+Then, look at 2021 [point to TransUNet]. This was the turning point where Transformers entered the field with TransUNet and Swin-UNETR, allowing us to capture global context.
++1
+
+Finally, look at the explosion of diversity in 2024 and 2025 on the far right. We now have Diffusion Models (in yellow) and State-Space Models like MedMamba (in red), which are solving the computational efficiency problems of the past.
+
+Good morning everyone, I am Gaurav kumar, and i am here to present at iciptm with our research titled "comprehensive review of deep learning approaches for brain tumor segmentation in mri". 
+
+vineeta.singh@s.amity.edu
+
+we have reviewed over 30 models from the last ten years, finding that although  we've hit 90% accuraacy ,the real challenge now is making these models efficient enough for a real hospital.  
+
+
+To understand why this review is necessary, we must look at the clinical reality. Brain tumors, particularly gliomas, are among the most difficult neurological conditions to treat. Radiologists rely on MRI scans, but manual segmentation——is incredibly time-consuming and often varies between different doctors. for this the demand for automated segmentation techniques increasing .Our review analyzes how deep learning has evolved over the last decade to solve this problem, moving from basic CNNs to advanced foundation models
+
+Our review categorizes research into five evolutionary phases. 
+If you look at this timeline, you can see a clear shift in the industry.
+On the left, from 2015 to 2019, we were in the 'CNN Era,' dominated by U-Net and its variants like Attn U-Net. These were excellent but limited to local features.
+Then, look at 2021 [point to TransUNet]. This was the turning point where Transformers entered the field with TransUNet and Swin-UNETR, allowing us to capture global context.
+Finally, look at the explosion of diversity in 2024 and 2025 on the far right. We now have Diffusion Models (in yellow) and State-Space Models like MedMamba (in red), which are solving the computational efficiency problems of the past.
+
+
+
+It started in 2015 with U-Net. Its encoder-decoder design became the blueprint for medical imaging. Later, models like nnU-Net automated the configuration process, setting a very high bar for performance. However, the limitation h of CNNs based is their limited receptive field—they struggle to understand long-range dependencies of brain images 
+
+
+This led to the Transformer Revolution around 2021. Models like TransUNet and Swin-UNet began using self-attention mechanisms to capture a global view of the image. Our analysis shows that hybrid models—those that blend convolutional layers with attention mechanisms—tend to perform best because they capture both local and global dependices like fine textures and the overall shape of the tumor
+
+
+Moving into 2024 and 2025, we see the rise of Diffusion Models and State-Space Models like MedMamba. Diffusion models excel at defining tumor borders but are computationally expensive. Conversely, Mamba-based architectures are exciting because they offer linear computational complexity compare to attention based, making them much more efficient for 3D medical data
+
+
+"In our comparative analysis of over 30 approaches, we found a clear trade-off. While accuracy has climbed from 0.81 to over 0.90, the computational cost has increased significantly. For example, while TransUNet is powerful, it requires very high GPU memory compared to traditional CNNs. This raises a critical question: are these models actually ready for a standard hospital room deployemment? "
+
+
+First, Computational Efficiency. Most SOTA models need high-end hardware.
+
+Second, Domain Generalization. A model trained on one scanner often fails on another.
++1
+
+Third, Interpretability. Doctors need 'Explainable AI' to trust these black-box results.
+
+And finally, the Domain Gap in large Foundation Models like SAM, which were often trained on natural images, not medical ones.
+
+
+"Looking forward, we believe the next breakthrough isn't just about 'deeper' networks. It’s about Multi-Modal Foundation Models that can read images alongside genomic data and clinical notes. We also see Federated Learning as a way for hospitals to collaborate without compromising patient privacy."
+
+
+[Slide 10: Conclusion]
+"In conclusion, automated brain tumor segmentation has come a long way in 10 years. We have the accuracy; now we need the efficiency and the trust. Thank you for your time. I am now open to any questions you may have
