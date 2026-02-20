@@ -28,25 +28,25 @@
 // 	if err != nil {
 // 		log.Fatalf("Unable to create connection pool: %v\n", err)
 // 	}
-// 	defer pool.Close()
+	defer pool.Close()
 
-// 	// Test connection
-// 	err = pool.Ping(ctx)
-// 	if err != nil {
-// 		log.Fatalf("Unable to connect to database: %v\n", err)
-// 	}
+	// Test connection
+	err = pool.Ping(ctx)
+	if err != nil {
+		log.Fatalf("Unable to connect to database: %v\n", err)
+	}
 
-// 	fmt.Println("Successfully connected to PostgreSQL!")
+	fmt.Println("Successfully connected to PostgreSQL!")
 
-// 	// Example query
-// 	var now time.Time
-// 	err = pool.QueryRow(ctx, "SELECT NOW()").Scan(&now)
-// 	if err != nil {
-// 		log.Fatalf("Query failed: %v\n", err)
-// 	}
+	// Example query
+	var now time.Time
+	err = pool.QueryRow(ctx, "SELECT NOW()").Scan(&now)
+	if err != nil {
+		log.Fatalf("Query failed: %v\n", err)
+	}
 
-// 	fmt.Println("Current time from DB:", now)
-// }
+	fmt.Println("Current time from DB:", now)
+}
 package main
 
 import (
