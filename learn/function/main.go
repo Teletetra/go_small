@@ -125,3 +125,57 @@ func PrintShapeDetails(s Shape){
 
 }
 
+
+
+func main(){
+
+  Age:=func(age int)int{
+
+    x:=age+69
+
+    return x
+
+  }
+
+  func (msg string){
+
+    fmt.Println(msg)
+
+  }("executed immeadiately")
+
+
+
+  fmt.Println(Age(4))
+
+
+
+  counter:=0
+
+  increment :=func()int{
+
+    counter++
+
+    return counter
+
+  }
+
+
+
+  fmt.Println(increment())
+
+  fmt.Println(increment())
+
+
+
+
+
+  addFunc:=func(x,y int) int{return x+y}
+
+  result:=applyOperation(5,7,addFunc)
+
+
+
+
+
+}
+
