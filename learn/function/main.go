@@ -61,3 +61,67 @@ func (c *Circle) Grow (factor float64){
 
 
 
+type Multiplier int
+
+
+
+func (m Multiplier) Multiply(val int) int{
+
+  return int(m)*val
+
+
+
+}
+
+
+
+// interface in golang 
+
+// how it work 
+
+type Shape interface{
+
+  Area() float64
+
+}
+
+
+
+type Circles struct{
+
+  Radius float64
+
+}
+
+
+
+type Rectangle struct{
+
+  Width, Height float64
+
+}
+
+
+
+func (c Circles) Area() float64{
+
+  return math.Pi*c.Radius*c.Radius
+
+}
+
+
+
+func (r Rectangle) Area() float64{
+
+  return r.Width* r.Height
+
+}
+
+
+
+func PrintShapeDetails(s Shape){
+
+  fmt.Printf("The area of this shape is:%.2f\n",s.Area())
+
+}
+
