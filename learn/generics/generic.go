@@ -4,22 +4,12 @@ import (
 	"fmt"
 )
 
-//////////////////////////////////////////////////////
-// 1️⃣ Generic Function (Works With Multiple Types)
-//////////////////////////////////////////////////////
-
-// T is a type parameter
 func PrintSlice[T any](items []T) {
 	for _, v := range items {
 		fmt.Println(v)
 	}
 }
 
-//////////////////////////////////////////////////////
-// 2️⃣ Generic Function With Type Constraint
-//////////////////////////////////////////////////////
-
-// Only numeric types allowed
 type Number interface {
 	~int | ~int32 | ~int64 | ~float32 | ~float64
 }
@@ -29,9 +19,6 @@ func Sum[T Number](a, b T) T {
 	return a + b
 }
 
-//////////////////////////////////////////////////////
-// 3️⃣ Generic Struct
-//////////////////////////////////////////////////////
 
 type Box[T any] struct {
 	value T
@@ -40,10 +27,6 @@ type Box[T any] struct {
 func (b Box[T]) Get() T {
 	return b.value
 }
-
-//////////////////////////////////////////////////////
-// 4️⃣ Comparable Constraint Example
-//////////////////////////////////////////////////////
 
 func Contains[T comparable](slice []T, target T) bool {
 	for _, v := range slice {
@@ -54,9 +37,6 @@ func Contains[T comparable](slice []T, target T) bool {
 	return false
 }
 
-//////////////////////////////////////////////////////
-// MAIN
-//////////////////////////////////////////////////////
 
 func main() {
 
