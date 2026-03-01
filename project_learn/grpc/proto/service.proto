@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// This tells the compiler where the Go package lives
+option go_package = "grpc/gen";
+
+message CreateRequest {
+    float amount = 1;
+    string from = 2;
+    string to = 3;
+}
+
+message CreateResponse {
+    string pdf_url = 1;
+    string doc_id = 2;
+}
+
+service Invoicer {
+    rpc Create(CreateRequest) returns (CreateResponse);
+}
