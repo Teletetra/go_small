@@ -12,3 +12,13 @@ func twoSum(nums []int, target int) []int {
     }
     return nil
 }
+
+
+func freq(arr int[]) map[int]int{
+	freq:= make(map[int]int)
+
+	for _,num:=range arr{
+		freq[num]++
+	}
+	return freq
+}
