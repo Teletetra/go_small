@@ -53,3 +53,21 @@ func main() {
 	arr := []int{2, 3, -2, 4}
 	fmt.Println("Maximum Product Subarray:", maxProduct(arr)) // Output: 6
 }
+
+func lengthOfLongestSubstring(s string) int {
+    maxLen:=0
+    left:=0
+    char_set:=make(map[rune]int)
+    for right,ch:=range s{
+        if prevIndex,exists:=char_set[ch];exists {
+            if prevIndex>=left{
+                left=prevIndex+1
+            }
+        }
+        char_set[ch]=right
+        if right-left+1>maxLen{
+            maxLen=right-left+1
+        }
+    }
+    return maxLen
+}
