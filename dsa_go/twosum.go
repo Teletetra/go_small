@@ -22,3 +22,19 @@ func freq(arr int[]) map[int]int{
 	}
 	return freq
 }
+
+
+func incdec(arr int[]) int[]{
+	n:=len(arr)
+	sort.Ints(arr)
+	mid:=n/2
+	left:=mid
+	right:=n-1
+
+	for left<right{
+		arr[left],arr[right]= arr[right],arr[left]
+		left++
+		right--
+	}
+	return arr
+}
