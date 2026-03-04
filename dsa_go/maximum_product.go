@@ -71,3 +71,26 @@ func lengthOfLongestSubstring(s string) int {
     }
     return maxLen
 }
+
+
+func rotateK(s string, k int) string{
+	runes:=[]rune(s)
+	n:=len(runes)
+	if n==0{
+		return s
+	}
+
+	k=k%n
+	return string(runes[k:])+string(runes[:k])
+}
+
+
+func rotateSlice[T any](s []T,k int)[] T{
+	n:=len(s)
+	if n==0{
+		return s
+	}
+	k=k%n
+	return append(s[k:],s[:k]...)
+
+}
