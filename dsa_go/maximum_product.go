@@ -94,3 +94,41 @@ func rotateSlice[T any](s []T,k int)[] T{
 	return append(s[k:],s[:k]...)
 
 }
+
+
+func removeComments(source []string) []string {
+    var result []string
+    inBlock := false
+    newline := ""
+
+    for _, line := range source {
+        i := 0
+
+        if !inBlock {
+            newline = ""
+        }
+
+        for i < len(line) {
+            if !inBlock && i+1 < len(line) && line[i] == '/' && line[i+1] == '*' {
+                inBlock = true
+                i += 2
+            } else if inBlock && i+1 < len(line) && line[i] == '*' && line[i+1] == '/' {
+                inBlock = false
+                i += 2
+            } else if !inBlock && i+1 < len(line) && line[i] == '/' && line[i+1] == '/' {
+                break
+            } else if !inBlock {
+                newline += string(line[i])
+                i++
+            } else {
+                i++
+            }
+        }
+
+        if !inBlock && len(newline) > 0 {
+            result = append(result, newline)
+        }
+    }
+
+    return result
+}
