@@ -132,3 +132,18 @@ func removeComments(source []string) []string {
 
     return result
 }
+
+
+type Fuck struct {
+	name   string
+	status string
+}
+
+func fuckme() Fuck {
+	f := Fuck{
+		name:   "kanishk",
+		status: "doomed",
+	}
+
+	return f
+}
