@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+<video id="local" autoplay muted></video>
+<video id="remote" autoplay></video>
+
+<script>
+let ws = new WebSocket("ws://localhost:8080/ws");
+let pc = new RTCPeerConnection();
+
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+.then(stream => {
+    document.getElementById("local").srcObject = stream;
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+});
+
+// ICE candidates
+pc.onicecandidate = event => {
+    if (event.candidate) {
+        ws.send(JSON.stringify({
+            type: "candidate",
+            data: JSON.stringify(event.candidate)
+        }));
+    }
+};
+
+// Remote stream
+pc.ontrack = event => {
+    document.getElementById("remote").srcObject = event.streams[0];
+};
+
+// Receive signaling
+ws.onmessage = async (msg) => {
+    let message = JSON.parse(msg.data);
+
+    if (message.type === "offer") {
+        await pc.setRemoteDescription(JSON.parse(message.data));
+        let answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+
+        ws.send(JSON.stringify({
+            type: "answer",
+            data: JSON.stringify(answer)
+        }));
+    }
+
+    if (message.type === "answer") {
+        await pc.setRemoteDescription(JSON.parse(message.data));
+    }
+
+    if (message.type === "candidate") {
+        await pc.addIceCandidate(JSON.parse(message.data));
+    }
+};
+
+// Start call
+async function startCall() {
+    let offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+
+    ws.send(JSON.stringify({
+        type: "offer",
+        data: JSON.stringify(offer)
+    }));
+}
+</script>
+
+<button onclick="startCall()">Start Call</button>
+
+</body>
+</html>
