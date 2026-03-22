@@ -101,3 +101,17 @@ func numberOfSubmatrices(grid [][]byte) int {
 
     return count
 }
+
+func reverseSubmatrix(grid [][]int, x int, y int, k int) [][]int {
+    // Flip rows vertically in-place
+    for i := 0; i < k/2; i++ {
+        top := x + i
+        bottom := x + k - 1 - i
+        for j := 0; j < k; j++ {
+            // Swap elements in the submatrix
+            grid[top][y+j], grid[bottom][y+j] = grid[bottom][y+j], grid[top][y+j]
+        }
+    }
+    return grid
+
+}
